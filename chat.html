@@ -14,7 +14,7 @@
 		embedded_svc.settings.displayHelpButton = true; //Or false
 		embedded_svc.settings.language = ''; //For example, enter 'en' or 'en-US'
 
-		 embedded_svc.settings.defaultMinimizedText = 'Chat with an Agent'; //(Defaults to Chat with an Expert)
+		//embedded_svc.settings.defaultMinimizedText = '...'; //(Defaults to Chat with an Expert)
 		//embedded_svc.settings.disabledMinimizedText = '...'; //(Defaults to Agent Offline)
 
 		//embedded_svc.settings.loadingText = ''; //(Defaults to Loading)
@@ -26,37 +26,30 @@
 			// Returns a valid button ID.
 		//};
 		//embedded_svc.settings.prepopulatedPrechatFields = {}; //Sets the auto-population of pre-chat form fields
+		
+				embedded_svc.settings.extraPrechatInfo = [{
+		  "entityFieldMaps": [{
+		    "doCreate": true,
+		    "doFind": true,
+		    "fieldName": "LastName",
+		    "isExactMatch": true,
+		    "label": "Last Name"
+		  }, {
+		    "doCreate": true,
+		    "doFind": true,
+		    "fieldName": "FirstName",
+		    "isExactMatch": true,
+		    "label": "First Name"
+		  }, {
+		    "doCreate": true,
+		    "doFind": true,
+		    "fieldName": "Email",
+		    "isExactMatch": true,
+		    "label": "Email"
+		  }],
+		  "entityName": "LiveChatTranscript",
+		  "saveToTranscript": "ContactId"
+		}];
+		
 		//embedded_svc.settings.fallbackRouting = []; //An array of button IDs, user IDs, or userId_buttonId
 		//embedded_svc.settings.offlineSupportMinimizedText = '...'; //(Defaults to Contact Us)
-
-		embedded_svc.settings.enabledFeatures = ['LiveAgent'];
-		embedded_svc.settings.entryFeature = 'LiveAgent';
-
-		embedded_svc.init(
-			'https://laura--preprod.my.salesforce.com',
-			'https://preprod-laurachat.cs192.force.com/CS',
-			gslbBaseURL,
-			'00DW0000008qNZ6',
-			'Laura_Chat_English',
-			{
-				baseLiveAgentContentURL: 'https://c.la3-c1cs-ia5.salesforceliveagent.com/content',
-				deploymentId: '57239000000PBxr',
-				buttonId: '5737d00000001Lz',
-				baseLiveAgentURL: 'https://d.la3-c1cs-ia5.salesforceliveagent.com/chat',
-				eswLiveAgentDevName: 'EmbeddedServiceLiveAgent_Parent04I7d0000000098EAA_17823bef6d9',
-				isOfflineSupportEnabled: true
-			}
-		);
-	};
-
-	if (!window.embedded_svc) {
-		var s = document.createElement('script');
-		s.setAttribute('src', 'https://laura--preprod.my.salesforce.com/embeddedservice/5.0/esw.min.js');
-		s.onload = function() {
-			initESW(null);
-		};
-		document.body.appendChild(s);
-	} else {
-		initESW('https://service.force.com');
-	}
-</script>
